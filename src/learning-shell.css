@@ -1,12 +1,14 @@
-/* Learning shell — industrial instrument chrome; all tracks share one accent. */
+/* Learning shell — industrial instrument chrome; all tracks share one accent.
+ * Consumes design tokens from ui/tokens.css via theme.css mappings.
+ */
 .ut-learning-shell {
-  --ut-learning-blue: var(--ui-accent);
-  --ut-learning-teal: var(--ui-accent-hi);
-  --ut-learning-orange: var(--ui-accent);
-  --ut-learning-line: var(--ui-line);
-  --ut-learning-ink: var(--ui-text);
-  --ut-learning-muted: var(--ui-muted);
-  --ut-learning-bg: var(--ui-bg);
+  --ut-learning-blue: var(--color-accent, var(--ui-accent));
+  --ut-learning-teal: var(--color-accent-hi, var(--ui-accent-hi));
+  --ut-learning-orange: var(--color-accent, var(--ui-accent));
+  --ut-learning-line: var(--color-line, var(--ui-line));
+  --ut-learning-ink: var(--color-text, var(--ui-text));
+  --ut-learning-muted: var(--color-text-muted, var(--ui-muted));
+  --ut-learning-bg: var(--color-bg-deep, var(--ui-bg));
   position: relative;
   z-index: 70;
   min-width: 0;

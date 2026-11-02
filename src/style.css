@@ -1,19 +1,20 @@
 :root {
-  --bg-0: #eef0f3;
+  /* Light theme panel values — consume tokens where possible */
+  --bg-0: var(--color-light-bg, #eef0f3);
   --bg-1: #c9ced6;
-  --ink: #1b2330;
-  --ink-2: #1b2330;
+  --ink: var(--color-light-text, #1b2330);
+  --ink-2: var(--color-light-text, #1b2330);
   --ink-3: #243044;
-  --line: #d9dde3;
-  --panel: #ffffff;
-  --accent: #0284c7;
+  --line: var(--color-light-line, #d9dde3);
+  --panel: var(--color-light-surface, #ffffff);
+  --accent: var(--color-accent-deep, #0284c7);
   --accent-soft: #e0f2fe;
-  --select: #f59e0b;
+  --select: var(--color-warm, #f59e0b);
   --warn-bg: #fff4e0;
   --warn-ink: #8a5300;
-  --ok-ink: #0f7a3d;
-  --bad-ink: #b42318;
-  --radius: 10px;
+  --ok-ink: var(--color-ok-deep, #0f7a3d);
+  --bad-ink: var(--color-bad-deep, #b42318);
+  --radius: var(--radius, 10px);
   font-family: var(--font-ui);
   color: var(--ink);
 }

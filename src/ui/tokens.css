@@ -1,0 +1,200 @@
+/*
+ * Design Tokens — 直探头 UT 仿真 webapp
+ * 
+ * Industrial control-panel aesthetic: deep blues, engineering accents, precise typography.
+ * All modules should consume these tokens instead of hard-coded values.
+ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * COLOR PALETTE
+   * Deep industrial blue / engineering blue / orange accent
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Backgrounds — dark industrial surfaces */
+  --color-bg-deep: #0a101c;
+  --color-bg-surface: #0d1524;
+  --color-panel: #121b2e;
+  --color-panel-alt: #182338;
+  --color-panel-elevated: #1a2740;
+  --color-well: #0b1322;
+
+  /* Lines & Borders */
+  --color-line: #24324a;
+  --color-line-subtle: #334560;
+  --color-line-accent: rgba(56, 189, 248, 0.12);
+
+  /* Text */
+  --color-text: #e2e8f0;
+  --color-text-strong: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-text-dim: #64748b;
+
+  /* Primary Accent — engineering blue (cyan-tinted) */
+  --color-accent: #38bdf8;
+  --color-accent-hi: #7dd3fc;
+  --color-accent-deep: #0284c7;
+  --color-accent-ink: #0a101c;
+  --color-accent-soft: rgba(56, 189, 248, 0.14);
+  --color-accent-glow: rgba(56, 189, 248, 0.28);
+
+  /* Secondary Accent — warm orange for warnings/highlights */
+  --color-warm: #fbbf24;
+  --color-warm-deep: #b45309;
+  --color-warm-soft: rgba(251, 191, 36, 0.12);
+
+  /* Semantic States */
+  --color-ok: #34d399;
+  --color-ok-deep: #15803d;
+  --color-bad: #f87171;
+  --color-bad-deep: #b91c1c;
+
+  /* Light theme aliases (used in #panel and light overlays) */
+  --color-light-bg: #eef0f3;
+  --color-light-surface: #ffffff;
+  --color-light-text: #1b2330;
+  --color-light-muted: #64748b;
+  --color-light-line: #d9dde3;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * TYPOGRAPHY
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Font Families */
+  --font-sans: "Segoe UI Variable", "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --font-mono: "Cascadia Mono", "JetBrains Mono", Consolas, "Microsoft YaHei", monospace;
+  --font-math: "Cambria Math", Cambria, serif;
+
+  /* Type Scale */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 36px;
+
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  /* Font Weights */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * SPACING SCALE
+   * 4px base unit
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-7: 32px;
+  --sp-8: 40px;
+  --sp-10: 48px;
+  --sp-12: 64px;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * BORDER RADIUS
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * SHADOWS
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  --shadow-sm: 0 1px 3px rgba(0, 6, 14, 0.12);
+  --shadow: 0 4px 12px rgba(0, 6, 14, 0.2);
+  --shadow-lg: 0 12px 36px rgba(0, 6, 14, 0.35);
+  --shadow-xl: 0 20px 48px rgba(0, 8, 18, 0.5);
+  --shadow-dropdown: 0 8px 24px rgba(0, 6, 14, 0.45);
+  --shadow-glow: 0 0 24px rgba(56, 189, 248, 0.2);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * Z-INDEX SCALE
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  --z-base: 0;
+  --z-raised: 1;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-overlay: 40;
+  --z-modal: 60;
+  --z-toast: 80;
+  --z-tooltip: 100;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * LAYOUT
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  --bar-height: 54px;
+  --bar-bg: linear-gradient(180deg, #141e32, #0d1524);
+  --panel-min-width: 360px;
+  --viewport-ratio: 7 / 3;
+
+  /* Card geometry */
+  --card-padding: 22px 24px 20px;
+  --card-gap: 20px;
+  --card-min-height: 280px;
+  --card-image-ratio: 16 / 10;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * TRANSITIONS
+   * ═══════════════════════════════════════════════════════════════════════════ */
+
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 400ms;
+  --easing-default: ease;
+  --easing-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+   * BREAKPOINTS (reference only — use in media queries)
+   * ═══════════════════════════════════════════════════════════════════════════ */
+  /* 
+   * --bp-sm: 600px   (phone landscape / small tablet)
+   * --bp-md: 900px   (tablet portrait / small desktop)
+   * --bp-lg: 1100px  (desktop)
+   * --bp-xl: 1440px  (large desktop)
+   */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+ * ACCESSIBILITY — prefers-reduced-motion
+ * ═══════════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+ * FORCED COLORS (high contrast mode)
+ * ═══════════════════════════════════════════════════════════════════════════════ */
+
+@media (forced-colors: active) {
+  :root {
+    --color-accent: LinkText;
+    --color-text: CanvasText;
+    --color-bg-deep: Canvas;
+    --color-line: ButtonText;
+  }
+}
