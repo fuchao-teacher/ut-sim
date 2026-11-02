@@ -5,6 +5,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import './ui/tokens.css';
+import './ui/step-guidance.css';
 import './theme.css';
 import './style.css';
 import './learning-workflow.css';
@@ -94,7 +95,7 @@ import { makeReferenceCard, presetDetectionPractice, createDetectionScoring, dra
 import './v4-workflow.css';
 import './mobile-compact.css';
 import './selfstudy.css';
-import { toastIn, toastOut, pageEnter, panelToggle, stepAdvance, isReducedMotion, killAnimations } from './ui/motion.js';
+import { toastIn, toastOut, pageEnter, panelToggle, stepAdvance, highlightPulse, isReducedMotion, killAnimations } from './ui/motion.js';
 const v4Format = (text, values = {}) => text.replace(/\{([a-z_]+)\}/g, (match, key) => key in values ? String(values[key]) : match);
 
 // ------------------------------------------------------------------ contract
@@ -4958,22 +4959,41 @@ function renderPracticePanel() {
 function buildSteps(box) {
   box.innerHTML = '';
   const full = studyFullFlow();
+  const P = S.prac;
+  const list = detectionTraining() ? practiceDoc.steps.filter((step) => ['scan', 'quantify', 'evaluate'].includes(step.id)) : practiceDoc.steps;
+  const doneCount = list.filter((step) => P.done[step.id]).length;
+  const totalCount = list.length + (full ? 1 : 0);
+
   if (full) {
-    const button = el('button', S.mode === 'equipment' ? 'on' : '', '<i>1</i>' + esc(V4.assembly_step));
+    const asmDone = P.flowAssemblyDone || false;
+    const asmCurrent = S.mode === 'equipment';
+    const button = el('button', [asmCurrent ? 'on' : '', asmDone ? 'done' : ''].filter(Boolean).join(' '), '<i>' + (asmDone ? '✓' : '1') + '</i>' + esc(V4.assembly_step));
     button.dataset.step = 'assembly'; button.onclick = () => setMode('equipment'); box.appendChild(button);
   }
-  const list = detectionTraining() ? practiceDoc.steps.filter((step) => ['scan', 'quantify', 'evaluate'].includes(step.id)) : practiceDoc.steps;
   list.forEach((step, index) => {
-    const open = stepOpen(step.id), current = step.id === S.prac.step && S.mode === 'practice';
-    const button = el('button', [current ? 'on' : '', open ? '' : 'locked'].filter(Boolean).join(' '), '<i>' + (index + 1 + (full ? 1 : 0)) + '</i>' + esc(step.name));
-    button.dataset.step = step.id; button.disabled = !open;
+    const open = stepOpen(step.id);
+    const done = P.done[step.id];
+    const current = step.id === P.step && S.mode === 'practice';
+    const classes = [current ? 'on' : '', done ? 'done' : '', !open && !done ? 'locked' : ''].filter(Boolean).join(' ');
+    const icon = done ? '✓' : String(index + 1 + (full ? 1 : 0));
+    const button = el('button', classes, '<i>' + icon + '</i>' + esc(step.name));
+    button.dataset.step = step.id;
+    button.disabled = !open && !done;
     button.onclick = () => {
-      if (full && S.mode !== 'practice') { prepareLearningStep(step.id); S.prac.step = step.id; setMode('practice'); }
+      if (full && S.mode !== 'practice') { prepareLearningStep(step.id); P.step = step.id; setMode('practice'); }
       setPracticeStep(step.id);
       stepAdvance(button);
     };
     box.appendChild(button);
   });
+
+  if (!detectionTraining() && !S.exam) {
+    const progressPct = Math.round((doneCount + (full && P.flowAssemblyDone ? 1 : 0)) / totalCount * 100);
+    const progress = el('div', 'step-progress');
+    progress.innerHTML = '<div class="step-progress-bar"><div class="step-progress-fill" style="width:' + progressPct + '%"></div></div>'
+      + '<span class="step-progress-text"><strong>' + (doneCount + (full && P.flowAssemblyDone ? 1 : 0)) + '</strong> / ' + totalCount + '</span>';
+    box.insertBefore(progress, box.firstChild);
+  }
 }
 
 function syncDetectionTarget() {
@@ -5266,6 +5286,7 @@ function updateGuide(now) {
     if (li && (li.offsetTop - head < guideBox.scrollTop || li.offsetTop + li.offsetHeight > guideBox.scrollTop + guideBox.clientHeight)) {
       guideBox.scrollTop = Math.max(0, li.offsetTop - head - 8);
     }
+    if (li) highlightPulse(li);
   }
 }
 
