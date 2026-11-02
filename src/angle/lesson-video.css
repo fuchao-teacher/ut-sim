@@ -1,0 +1,94 @@
+.ag-video-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, .55);
+  backdrop-filter: blur(2px);
+}
+
+.ag-video-card {
+  width: min(1100px, 96vw);
+  max-height: min(92vh, 820px);
+  display: flex;
+  flex-direction: column;
+  background: #0f172a;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, .45);
+  overflow: hidden;
+  color: #e2e8f0;
+}
+
+.ag-video-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #1e293b;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.ag-video-head h2 {
+  margin: 0;
+  flex: 1;
+  font-size: 17px;
+  font-weight: 650;
+  color: #f8fafc;
+}
+
+.ag-video-close {
+  border: 1px solid rgba(255, 255, 255, .18);
+  background: rgba(255, 255, 255, .06);
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ag-video-close:hover {
+  background: rgba(255, 255, 255, .12);
+}
+
+.ag-video-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: #000;
+  display: grid;
+  place-items: center;
+}
+
+.ag-video-stage video {
+  display: block;
+  width: 100%;
+  max-height: min(78vh, 720px);
+  background: #000;
+}
+
+.ag-video-miss {
+  position: absolute;
+  inset: auto 16px 16px;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(127, 29, 29, .92);
+  color: #fecaca;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.angle-root .ag-video-btn {
+  border-color: #b45309;
+  color: #9a3412;
+  font-weight: 600;
+}
+
+.angle-root .ag-video-btn:hover {
+  background: #fff7ed;
+  border-color: #c2410c;
+  color: #c2410c;
+}

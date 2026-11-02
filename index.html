@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <h1 id="title"></h1>
+      <details id="legacyMore"><summary id="moreLabel"></summary><nav id="modes" role="tablist"></nav></details>
+      <nav id="eqview" role="tablist" hidden></nav>
+      <nav id="sview" role="tablist" hidden></nav>
+      <nav id="study" role="tablist"></nav>
+      <div id="topbarActs">
+        <button id="labRoomBack" class="top-btn" type="button" hidden></button>
+        <button id="stationBenchBack" class="top-btn" type="button" hidden></button>
+        <button id="btn-manual" class="top-btn" type="button">手册</button>
+      </div>
+    </header>
+    <div id="learningMount"></div>
+    <main id="stage">
+      <section id="viewport">
+        <canvas id="gl"></canvas>
+        <svg id="leaders"></svg>
+        <div id="labels"></div>
+        <div id="markers"></div>
+        <div id="chainlegend" hidden></div>
+        <div id="stagecard" hidden></div>
+        <div id="badges"></div>
+        <div id="tooltip" hidden></div>
+        <div id="loading"><div class="spinner"></div></div>
+      </section>
+      <aside id="panel"></aside>
+    </main>
+    <footer id="controls"></footer>
+  </div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
