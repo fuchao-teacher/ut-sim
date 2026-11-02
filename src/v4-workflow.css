@@ -2,12 +2,12 @@
 body[data-learning-route="home"] #eqview,
 body[data-learning-route="home"] #sview,
 body:not([data-learning-role="teacher"]) #study { display: none; }
-.v4-transient-note { font-size: 12px; color: #536275; margin: 8px 0; }
-.v4-card-reasons { margin-top: 20px; display: grid; gap: 8px; }
-.v4-card-reasons details { padding: 10px 12px; border: 1px solid #d8e1ec; border-radius: 8px; }
-.v4-card-reasons summary { cursor: pointer; font-weight: 600; }
-.v4-card-reasons p { line-height: 1.7; margin: 8px 0 0; }
-.v4-teacher-cases { display: grid; gap: 16px; }
-.v4-teacher-cases select { padding: 10px; font: inherit; border: 1px solid #cbd5e1; border-radius: 6px; }
-.exam-start details { grid-column: 1 / -1; padding: 10px; }
-.exam-start details label { margin-top: 10px; }
+.v4-transient-note { font-size: var(--text-xs, 12px); color: var(--color-text-muted, #536275); margin: var(--sp-2, 8px) 0; }
+.v4-card-reasons { margin-top: var(--sp-5, 20px); display: grid; gap: var(--sp-2, 8px); }
+.v4-card-reasons details { padding: var(--sp-3, 10px) var(--sp-3, 12px); border: 1px solid var(--color-light-line, #d8e1ec); border-radius: var(--radius-sm, 8px); }
+.v4-card-reasons summary { cursor: pointer; font-weight: var(--weight-semibold, 600); }
+.v4-card-reasons p { line-height: var(--leading-relaxed, 1.7); margin: var(--sp-2, 8px) 0 0; }
+.v4-teacher-cases { display: grid; gap: var(--sp-4, 16px); }
+.v4-teacher-cases select { padding: var(--sp-3, 10px); font: inherit; border: 1px solid var(--color-light-line, #cbd5e1); border-radius: 6px; }
+.exam-start details { grid-column: 1 / -1; padding: var(--sp-3, 10px); }
+.exam-start details label { margin-top: var(--sp-3, 10px); }

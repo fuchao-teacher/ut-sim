@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+import './ui/tokens.css';
 import './theme.css';
 import './style.css';
 import './learning-workflow.css';

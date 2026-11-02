@@ -1,8 +1,8 @@
 /* M30-style light target — same surface as other panel blocks (no dark island) */
 .v5-target {
-  border: 1px solid #e3e7ed; border-left: 5px solid #0284c7;
-  padding: 10px 14px; margin: 0 0 10px;
-  background: #fff; color: #1b2330; border-radius: 12px;
+  border: 1px solid var(--color-light-line, #e3e7ed); border-left: 5px solid var(--color-accent-deep, #0284c7);
+  padding: var(--sp-3, 10px) var(--sp-4, 14px); margin: 0 0 var(--sp-3, 10px);
+  background: var(--color-light-surface, #fff); color: var(--color-light-text, #1b2330); border-radius: var(--radius, 12px);
   box-shadow: none;
 }
 .v5-target-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -20,7 +20,7 @@
 }
 .v5-hint:hover { background: #f59e0b; color: #fff; }
 
-.v5-quick-controls { border: 1px solid #64748b; padding: 10px 12px; margin: 10px 0; border-radius: 10px; background: #0f1828; }
+.v5-quick-controls { border: 1px solid var(--color-line-subtle, #64748b); padding: var(--sp-3, 10px) var(--sp-3, 12px); margin: var(--sp-3, 10px) 0; border-radius: var(--radius-sm, 10px); background: var(--color-bg-surface, #0f1828); }
 .v5-control-title { font-size: 15px; color: #f8f3e9; margin: 0 0 4px; }
 .v5-quick-controls .ic-row { grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid #ffffff1c; }
 .v5-quick-controls .ic-row:last-child { border-bottom: 0; }
