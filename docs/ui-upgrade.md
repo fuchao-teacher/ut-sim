@@ -287,6 +287,98 @@ function showNewPanel(el) {
 }
 ```
 
+## Phase D: Classroom Flow Guidance UX
+
+Phase D adds unified guidance UI for the classroom practice workflow, making step state (current/completed/blocked) obvious to trainees.
+
+### Classroom Flow Documentation
+
+See [docs/classroom-flow.md](classroom-flow.md) for the complete state diagram documenting:
+- Practice workflow steps (calibrate → dac → sensitivity → scan → quantify → evaluate)
+- Step state transitions (locked → open → done)
+- Entry flows by learning mode
+- Blocking reasons and resolutions
+- Guide checklist system
+
+### New CSS Module: `src/ui/step-guidance.css`
+
+Unified styling for:
+
+| Component | Purpose |
+|-----------|---------|
+| `.prac-steps` | Step bar with `.on`, `.done`, `.locked` states |
+| `.step-progress` | Visual progress bar showing completed/total steps |
+| `.step-blocked` | Blocking reason banner with action button |
+| `.guide` / `.gd-*` | Guide checklist panel styling |
+| `.pc-*` | Practice card table/kv improvements |
+| `.exam-*` | Score/report drawer enhancements |
+
+### Step Bar Visual States
+
+```css
+/* Current step */
+.prac-steps button.on { border-color: var(--color-accent-deep); }
+
+/* Completed step */
+.prac-steps button.done { border-color: var(--color-ok-deep); }
+.prac-steps button.done i::before { content: '✓'; }
+
+/* Locked step */
+.prac-steps button.locked { opacity: 0.7; cursor: not-allowed; }
+.prac-steps button.locked i::before { content: '🔒'; }
+```
+
+### Progress Bar
+
+Non-exam modes display a progress indicator:
+
+```html
+<div class="step-progress">
+  <div class="step-progress-bar">
+    <div class="step-progress-fill" style="width: 50%"></div>
+  </div>
+  <span class="step-progress-text"><strong>3</strong> / 6</span>
+</div>
+```
+
+### Score/Report Readability (钢板/焊缝/均值/区域)
+
+Improved table and key-value styling for evaluation feedback:
+- `.pc-table` — Consistent header styling, alternating row hints
+- `.pc-kv` — Grid layout for key-value pairs
+- `.pc-sub` — Section headers with bottom border
+- `.exam-eval` — Verdict comparison panel
+- Status indicators: `.ok` (green), `.ng` (red), `.use` (blue accent)
+
+### Motion Integration
+
+Phase D wires these motion helpers to the guidance UI:
+
+| Call Site | Function | Effect |
+|-----------|----------|--------|
+| `buildSteps()` onclick | `stepAdvance()` | Pulse feedback on step click |
+| `updateGuide()` | `highlightPulse()` | Highlight current checklist item |
+
+### Trainee Main Path
+
+After Phase D, a new trainee can follow the straight-probe practice flow without a manual:
+
+1. **Step bar** — Clear visual of current position and completed steps
+2. **Progress indicator** — Shows X / 6 steps done
+3. **Locked steps** — Obvious 🔒 icon with disabled state
+4. **Guide checklist** — Current item highlighted, sub-items expandable
+5. **Blocking feedback** — Toast messages explain why an action failed
+6. **Done indicator** — ✓ checkmark on completed steps
+
+### Files Changed
+
+| File | Change |
+|------|--------|
+| `src/ui/step-guidance.css` | New — unified guidance styles |
+| `src/main.js` | Import new CSS, enhance `buildSteps()`, wire `highlightPulse()` |
+| `docs/classroom-flow.md` | New — state diagram documentation |
+| `docs/ui-upgrade.md` | Phase D section added |
+
 ## Version History
 
 | Version | Date | Changes |
@@ -294,3 +386,4 @@ function showNewPanel(el) {
 | 1.0.0 | Baseline | Pre-upgrade snapshot (tag: `pre-upgrade`) |
 | 1.1.0 | Phase A/B | Token system, layout unification |
 | 1.2.0 | Phase C | GSAP motion layer, toast/step/panel animations |
+| 1.3.0 | Phase D | Classroom flow guidance UX, step states, report readability |
