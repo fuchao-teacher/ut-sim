@@ -94,6 +94,7 @@ import { makeReferenceCard, presetDetectionPractice, createDetectionScoring, dra
 import './v4-workflow.css';
 import './mobile-compact.css';
 import './selfstudy.css';
+import { toastIn, toastOut, pageEnter, panelToggle, stepAdvance, isReducedMotion, killAnimations } from './ui/motion.js';
 const v4Format = (text, values = {}) => text.replace(/\{([a-z_]+)\}/g, (match, key) => key in values ? String(values[key]) : match);
 
 // ------------------------------------------------------------------ contract
@@ -4969,6 +4970,7 @@ function buildSteps(box) {
     button.onclick = () => {
       if (full && S.mode !== 'practice') { prepareLearningStep(step.id); S.prac.step = step.id; setMode('practice'); }
       setPracticeStep(step.id);
+      stepAdvance(button);
     };
     box.appendChild(button);
   });
@@ -6183,9 +6185,16 @@ function showSsToast(text) {
     viewport.appendChild(tip);
   }
   tip.textContent = text;
+  killAnimations(tip);
   tip.classList.add('show');
-  clearTimeout(showSsToast.timer);
-  showSsToast.timer = setTimeout(() => tip.classList.remove('show'), 2200);
+  toastIn(tip, {
+    onComplete: () => {
+      clearTimeout(showSsToast.timer);
+      showSsToast.timer = setTimeout(() => {
+        toastOut(tip, { onComplete: () => tip.classList.remove('show') });
+      }, 2000);
+    },
+  });
 }
 
 function closeSsPlan() {
@@ -6973,7 +6982,13 @@ function setStd(on, focus = null) {
 
 function updateStdBox() {
   stdBtn.classList.toggle('on', S.prac.std);
+  const wasHidden = stdBox.hidden;
   stdBox.hidden = !S.prac.std;
+  if (!wasHidden && stdBox.hidden) {
+    panelToggle(stdBox, false);
+  } else if (wasHidden && !stdBox.hidden) {
+    panelToggle(stdBox, true);
+  }
   if (!S.prac.std) return;
   const step = S.prac.step;
   const ctx = stdCtx();
@@ -8296,9 +8311,16 @@ function examKitToast(text) {
     viewport.appendChild(tip);
   }
   tip.textContent = text;
+  killAnimations(tip);
   tip.classList.add('show');
-  clearTimeout(examKitToastTimer);
-  examKitToastTimer = setTimeout(() => tip.classList.remove('show'), 1800);
+  toastIn(tip, {
+    onComplete: () => {
+      clearTimeout(examKitToastTimer);
+      examKitToastTimer = setTimeout(() => {
+        toastOut(tip, { onComplete: () => tip.classList.remove('show') });
+      }, 1600);
+    },
+  });
 }
 
 function hideWeldExamWarn() {

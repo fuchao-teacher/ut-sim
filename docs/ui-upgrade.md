@@ -194,9 +194,103 @@ src/
 └── ...
 ```
 
+## Phase C: GSAP Motion Layer
+
+Phase C adds GSAP-powered UI animations while preserving all hard constraints.
+
+### Motion Module API
+
+All motion functions are exported from `src/ui/motion.js`:
+
+```javascript
+import { 
+  pageEnter,      // Page/section fade-up entrance
+  pageExit,       // Page/section fade-down exit
+  panelToggle,    // Expand/collapse panel animation
+  stepAdvance,    // Step completion pulse feedback
+  toastIn,        // Toast slide-up entrance
+  toastOut,       // Toast fade-out exit
+  cardExpand,     // Card grow animation
+  modeTransition, // Cross-fade between modes
+  highlightPulse, // Attention-drawing pulse
+  isReducedMotion,// Check reduced-motion preference
+  killAnimations, // Cancel all tweens on target
+  gsap,           // Re-exported GSAP instance
+} from './ui/motion.js';
+```
+
+### Function Signatures
+
+```javascript
+// Page/section enter — fade up from below
+pageEnter(target, { duration?, y?, stagger?, onComplete? })
+
+// Panel expand/collapse
+panelToggle(target, expand: boolean, { duration?, onComplete? })
+
+// Step advance feedback pulse
+stepAdvance(target, { duration?, onComplete? })
+
+// Toast enter/exit
+toastIn(target, { duration?, y?, onComplete? })
+toastOut(target, { duration?, onComplete? })
+
+// Mode transition (cross-fade)
+modeTransition(exitTarget, enterTarget, { duration?, onComplete? })
+```
+
+### Reduced Motion Handling
+
+All functions check `prefers-reduced-motion` at runtime:
+- When reduced motion is preferred, instant state changes are applied (no tween)
+- Functions return `null` instead of a tween instance
+- The preference is monitored via `matchMedia` listener
+
+```javascript
+// Check current preference
+if (isReducedMotion()) {
+  // Skip animation-dependent logic
+}
+```
+
+### Integration Points
+
+Phase C wires motion helpers at these call sites:
+
+| Location | Function | Effect |
+|----------|----------|--------|
+| `showSsToast()` | `toastIn`, `toastOut` | Self-study toast notifications |
+| `examKitToast()` | `toastIn`, `toastOut` | Exam kit feedback toasts |
+| `buildSteps()` onclick | `stepAdvance` | Practice step button feedback |
+| `updateStdBox()` | `panelToggle` | Standard reference panel toggle |
+
+### Constraints
+
+- **No rAF binding**: GSAP timelines never synchronize with Three.js render loop
+- **Transform/opacity only**: All tweens use compositor-friendly properties
+- **No ScrollTrigger**: Not needed for current UI; add only if theory/manual pages require
+- **No Three.js camera**: Camera/controls animation remains in Three.js domain
+
+### Adding New Animations
+
+1. Import the appropriate function from `motion.js`
+2. Call at the state-change point (not in render loop)
+3. Always test with `prefers-reduced-motion: reduce`
+
+Example:
+```javascript
+import { pageEnter } from './ui/motion.js';
+
+function showNewPanel(el) {
+  el.style.display = '';
+  pageEnter(el, { stagger: 0.08 });
+}
+```
+
 ## Version History
 
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0.0 | Baseline | Pre-upgrade snapshot (tag: `pre-upgrade`) |
 | 1.1.0 | Phase A/B | Token system, layout unification |
+| 1.2.0 | Phase C | GSAP motion layer, toast/step/panel animations |

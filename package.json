@@ -11,6 +11,7 @@
     "tutor-proxy": "node tools/tutor_proxy.mjs"
   },
   "dependencies": {
+    "gsap": "^3.15.0",
     "katex": "^0.18.9",
     "three": "^0.186.1"
   },
