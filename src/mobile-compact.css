@@ -1,0 +1,312 @@
+/* Compact / phone landscape shell. Desktop layout unchanged when body:not(.compact). */
+
+body.compact #topbar {
+  gap: 8px;
+  padding: 4px 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+body.compact #title { font-size: 15px; max-width: 42vw; overflow: hidden; text-overflow: ellipsis; }
+body.compact #modes button,
+body.compact #eqview button,
+body.compact #sview button,
+body.compact #study button { padding: 6px 10px; font-size: 13px; white-space: nowrap; }
+body.compact #legacyMore summary { font-size: 13px; padding: 6px 8px; }
+
+body.compact:not(.show-labels) #labels,
+body.compact:not(.show-labels) #leaders { display: none !important; }
+body.compact #badges { display: none !important; }
+body.compact .label { font-size: 12px; padding: 2px 6px; }
+
+body.compact #controls {
+  gap: 4px;
+  padding: 4px 8px;
+  min-height: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+body.compact #controls button { min-height: 36px; padding: 6px 10px; font-size: 13px; }
+body.compact #controls input[type=range] { width: 88px; }
+
+/* ---- practice tabs: scene | wave | ops ---- */
+/* #app children: topbar, learningMount, stage, controls, mobileTabs */
+body.compact-practice #app {
+  grid-template-rows: 0 auto minmax(0, 1fr) 0 48px;
+}
+body.compact-practice #topbar {
+  display: none !important;
+}
+body.compact-practice #controls { display: none !important; }
+body.compact-practice #learningMount:empty { display: none; }
+body.compact-practice .ut-learning-bar {
+  min-height: 40px;
+  gap: 8px;
+  padding: 4px 10px;
+  overflow-x: auto;
+}
+body.compact-practice .ut-learning-roles button {
+  min-height: 34px;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+body.compact-practice .ut-learning-topics {
+  padding: 0 10px 6px;
+  gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+body.compact-practice .ut-learning-topics button {
+  min-height: 30px;
+  padding: 4px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+body.compact-practice .ut-learning-current,
+body.compact-practice .ut-learning-status { display: none; }
+body.compact-practice .ut-learning-home-button,
+body.compact-practice .ut-learning-back {
+  padding: 6px 8px;
+  font-size: 12px !important;
+}
+body.compact-practice #mobileTabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  height: 48px;
+  background: #0f172a;
+  border-top: 1px solid #1e293b;
+  z-index: 12;
+  padding: env(safe-area-inset-bottom, 0) 0 0;
+}
+body.compact-practice #mobileTabs button {
+  border: 0;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 15px;
+  font-weight: 800;
+  min-height: 48px;
+  cursor: pointer;
+}
+body.compact-practice #mobileTabs button.on {
+  color: #fff;
+  background: #1e293b;
+  box-shadow: inset 0 3px 0 #f59e0b;
+}
+
+body.compact-practice #stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 0;
+}
+body.compact-practice #viewport,
+body.compact-practice #panel {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  border: 0;
+}
+body.compact-practice #panel {
+  padding: 8px 10px 12px;
+  font-size: 15px;
+  line-height: 1.45;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #f3f5f8;
+}
+
+body.compact-practice[data-mobile-tab="scene"] #panel {
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+body.compact-practice[data-mobile-tab="scene"] #viewport {
+  visibility: visible;
+  z-index: 1;
+  pointer-events: auto;
+}
+body.compact-practice[data-mobile-tab="wave"] #viewport,
+body.compact-practice[data-mobile-tab="ops"] #viewport {
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+body.compact-practice[data-mobile-tab="wave"] #panel,
+body.compact-practice[data-mobile-tab="ops"] #panel {
+  visibility: visible;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Scene tab: float docked bottom, labels off */
+body.compact-practice[data-mobile-tab="scene"] .v5-float {
+  left: 8px !important;
+  right: 8px !important;
+  top: auto !important;
+  bottom: 8px !important;
+  width: auto;
+  max-width: none;
+  z-index: 9;
+}
+body.compact-practice[data-mobile-tab="scene"] .v5-float.fold {
+  width: auto;
+}
+body.compact-practice[data-mobile-tab="wave"] .v5-float,
+body.compact-practice[data-mobile-tab="ops"] .v5-float {
+  display: none !important;
+}
+
+body.compact-practice .vp-tools {
+  top: 8px;
+  right: 8px;
+  gap: 6px;
+}
+body.compact-practice .guide-btn {
+  padding: 6px 12px 6px 7px;
+  font-size: 13px;
+}
+body.compact-practice .guide,
+body.compact-practice .guide.std-box {
+  left: 8px;
+  right: 8px;
+  top: auto;
+  bottom: 56px;
+  width: auto;
+  max-width: none;
+  max-height: min(48vh, 280px);
+  z-index: 10;
+}
+
+/* Wave tab: A-scan focus */
+body.compact-practice[data-mobile-tab="wave"] .prac-home {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 100%;
+}
+body.compact-practice[data-mobile-tab="wave"] .insp-hero,
+body.compact-practice[data-mobile-tab="wave"] .workflow-note,
+body.compact-practice[data-mobile-tab="wave"] .v5-target,
+body.compact-practice[data-mobile-tab="wave"] .prac-steps,
+body.compact-practice[data-mobile-tab="wave"] .insp-scenes,
+body.compact-practice[data-mobile-tab="wave"] .prac-std,
+body.compact-practice[data-mobile-tab="wave"] .insp-cams,
+body.compact-practice[data-mobile-tab="wave"] .prac-bar,
+body.compact-practice[data-mobile-tab="wave"] .prac-card,
+body.compact-practice[data-mobile-tab="wave"] .prac-cards,
+body.compact-practice[data-mobile-tab="wave"] .workflow-boundary,
+body.compact-practice[data-mobile-tab="wave"] .insp-ctrls:not(.v5-quick-controls) {
+  display: none !important;
+}
+body.compact-practice[data-mobile-tab="wave"] .sess-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+body.compact-practice[data-mobile-tab="wave"] .insp-scope {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin: 0;
+}
+body.compact-practice[data-mobile-tab="wave"] .insp-canvas {
+  width: 100% !important;
+  max-width: none;
+  flex: 1;
+  min-height: 180px;
+}
+body.compact-practice[data-mobile-tab="wave"] .scope-act,
+body.compact-practice[data-mobile-tab="wave"] .scope-export {
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+/* Ops tab: steps + card */
+body.compact-practice[data-mobile-tab="ops"] .insp-hero .truth,
+body.compact-practice[data-mobile-tab="ops"] .workflow-note,
+body.compact-practice[data-mobile-tab="ops"] .insp-cams,
+body.compact-practice[data-mobile-tab="ops"] .insp-scope,
+body.compact-practice[data-mobile-tab="ops"] .workflow-boundary,
+body.compact-practice[data-mobile-tab="ops"] .prac-cards {
+  display: none !important;
+}
+body.compact-practice[data-mobile-tab="ops"] .insp-hero h2 { font-size: 18px; margin: 0; }
+body.compact-practice[data-mobile-tab="ops"] .prac-steps {
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 6px;
+}
+body.compact-practice[data-mobile-tab="ops"] .prac-steps button {
+  min-height: 40px;
+  font-size: 13px;
+  padding: 6px 4px;
+}
+body.compact-practice[data-mobile-tab="ops"] .pc-btns button,
+body.compact-practice[data-mobile-tab="ops"] .pc-targets button,
+body.compact-practice[data-mobile-tab="ops"] select {
+  min-height: 40px;
+  font-size: 14px;
+}
+body.compact-practice[data-mobile-tab="ops"] .pc-table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+body.compact-practice[data-mobile-tab="ops"] .v5-target-head strong { font-size: 20px; }
+
+/* Touch targets and general compact practice */
+body.compact-practice button,
+body.compact-practice select,
+body.compact-practice .ic-nudge button {
+  touch-action: manipulation;
+}
+body.compact-practice .v5-move button,
+body.compact-practice .v5-move-step button {
+  min-height: 40px;
+}
+
+/* Non-practice compact: still avoid 360px side column crushing the 3D */
+body.compact:not(.compact-practice) #stage {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 34vw);
+}
+body.compact:not(.compact-practice) #panel {
+  padding: 10px 12px 16px;
+  font-size: 15px;
+}
+
+/* Weld track: one scrollable topic row so the angle-beam pages keep their height */
+body.compact[data-track="weld"] #topbar { display: none !important; }
+body.compact[data-track="weld"] .ut-learning-bar {
+  min-height: 40px;
+  gap: 8px;
+  padding: 4px 10px;
+}
+body.compact[data-track="weld"] .ut-learning-roles button {
+  min-height: 34px;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+body.compact[data-track="weld"] .ut-learning-status { display: none; }
+body.compact[data-track="weld"] .ut-learning-home-button,
+body.compact[data-track="weld"] .ut-learning-back {
+  padding: 6px 8px;
+  font-size: 12px !important;
+}
+body.compact[data-track="weld"] .ut-learning-topics {
+  padding: 0 10px 6px;
+  gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+body.compact[data-track="weld"] .ut-learning-topics button {
+  min-height: 30px;
+  padding: 4px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#mobileTabs { display: none; }

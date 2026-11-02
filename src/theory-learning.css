@@ -1,0 +1,44 @@
+.theory-learning {
+  margin: 12px 0;
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #172b4d;
+  line-height: 1.55;
+}
+.theory-learning h3 { margin: 0 0 12px; font-size: 15px; }
+.theory-learning h4, .theory-prediction legend { margin: 0 0 6px; font-size: 13px; font-weight: 700; }
+.theory-learning p { margin: 6px 0; font-size: 13px; }
+.theory-prediction { margin: 0; padding: 0; min-width: 0; border: 0; }
+.theory-options { display: grid; gap: 6px; margin: 8px 0; }
+.theory-option {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  background: #fff;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.theory-option:hover { border-color: #0284c7; background: #f8fafc; }
+.theory-option.selected { border-color: #0284c7; background: #f0f9ff; box-shadow: inset 3px 0 #0284c7; }
+.theory-option:focus-visible { outline: 2px solid #0284c7; outline-offset: 2px; }
+.theory-comparison, .theory-explanation { margin-top: 14px; padding-top: 12px; border-top: 1px solid #e2e8f0; }
+.theory-table-wrap { overflow-x: auto; margin: 8px 0; }
+.theory-learning table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.theory-learning th, .theory-learning td { padding: 6px; border-bottom: 1px solid #e2e8f0; text-align: left; vertical-align: top; }
+.theory-learning thead th { background: #f8fafc; font-weight: 700; }
+.theory-learning tbody th { width: 38%; font-weight: 500; }
+.theory-learning .theory-hint, .theory-learning .theory-condition { color: #52647d; font-size: 12px; }
+.theory-observe b, .theory-condition b { margin-right: 4px; }
+.theory-result { font-weight: 700; }
+.theory-result.correct { color: #166534; }
+.theory-result.recheck, .theory-warning { color: #92400e; }
+@media (max-width: 540px) {
+  .theory-learning { padding: 10px; }
+  .theory-learning th, .theory-learning td { padding: 5px 4px; }
+}
